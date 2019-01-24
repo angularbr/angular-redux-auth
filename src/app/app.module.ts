@@ -10,12 +10,15 @@ import { MatButtonModule, MatCardModule, MatInputModule, MatToolbarModule } from
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { AppRouterGuard } from "./routerGuard.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { HomeComponent } from './home/home.component';
     MatInputModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
