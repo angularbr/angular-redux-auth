@@ -2,17 +2,21 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AuthenticationService } from './authentication.service';
-import { fakeBackendProvider } from './mock/http.mock.interceptor';
+import { fakeBackendProvider } from '../mock/http.mock.interceptor';
+import { Store } from '@ngrx/store';
 
 describe('AuthenticationService', () => {
   let injector: TestBed;
   let service: AuthenticationService;
   let httpMock: HttpTestingController;
 
+  const user = JSON.stringify({ email: 'test@mail', password: '123', id: 1 })
+  localStorage.setItem('users', user);
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthenticationService,fakeBackendProvider]
+      providers: [AuthenticationService, fakeBackendProvider]
     });
     injector = getTestBed();
     service = injector.get(AuthenticationService);
@@ -34,7 +38,6 @@ describe('AuthenticationService', () => {
         expect(users.length).toBe(0);
       });
 
-    
     });
     it('should send Post Success', () => {
 
@@ -43,9 +46,9 @@ describe('AuthenticationService', () => {
         expect(users).toContain("token");
       });
 
-    
     });
   });
+
 });
 
 

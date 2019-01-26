@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as fromAuth from '../store'
+import { getCurrentError } from '../store';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -9,8 +14,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent {
 
   loginForm: FormGroup;
-
-  constructor(private builder: FormBuilder) {
+  error$: Observable<any>;
+  constructor(private store: Store<fromAuth.AuthActions>, private builder: FormBuilder) {
 
     this.loginForm = this.builder.group({
       email: ['', Validators.required],
@@ -18,12 +23,12 @@ export class LoginComponent {
     });
   }
 
-  submit(): void {
-    console.log(this.loginForm.value);
+  ngOnInit(): void {
+    this.error$ = this.store.select(getCurrentError);
   }
 
-  logout(): void {
-
+  submit(): void {
+    this.store.dispatch(new fromAuth.AuthLogin(this.loginForm.value))
   }
 
 }

@@ -11,20 +11,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // array in local storage for registered users
-        let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+        let users: any[];
+        users = [JSON.parse(localStorage.getItem('users'))];
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
             // authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-                // find if any user matches login credentials
-                let filteredUsers = users.filter((user: User) => {
+
+                const thisuser = users.filter(user => {
                     return user.email === request.body.email && user.password === request.body.password;
                 });
 
-                if (filteredUsers.length) {
+                if (thisuser.length) {
                     // if login details are valid return 200 OK with user details and fake jwt toke
                     let body: Authentication = {
                         token: 'fake-jwt-token',
@@ -34,7 +34,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: body }));
                 } else {
                     // else return 400 bad request
-                    return throwError({ error: { message: 'User email or password is incorrect' } });
+                    return throwError({ error: 'User email or password is incorrect' });
                 }
             }
 
@@ -51,7 +51,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: user }));
                 } else {
                     // return 401 not authorised if token is null or invalid
-                    return throwError({ status: 401, error: { message: 'Unauthorized' } });
+                    return throwError({ status: 401, error: 'Unauthorized' });
                 }
             }
 

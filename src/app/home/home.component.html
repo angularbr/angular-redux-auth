@@ -1,8 +1,23 @@
 <mat-toolbar color="primary">
   <h1>Dashboard</h1>
+  <span style="flex: 0.4 0.4 auto;"></span>
+  <button mat-raised-button color="primary" [disabled]="!(hasStateToken$ | async)" [routerLink]="['/user']">Acessar
+    Area Restrita</button>
   <span style="flex: 1 1 auto;"></span>
   <button mat-raised-button color="accent" [routerLink]="['/login']">Login</button>
-  <button mat-raised-button>Logout</button>
+  <button mat-raised-button (click)="logout()">Logout</button>
+
 </mat-toolbar>
 
 <router-outlet></router-outlet>
+
+<ng-container *ngIf="(hasStateToken$ | async); else elseTemplate">
+
+</ng-container>
+<ng-template #elseTemplate>
+  
+ <ul>
+   <li>Email: test@mail</li>
+   <li>Senha: 123</li>
+ </ul>
+</ng-template>

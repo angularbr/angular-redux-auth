@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './tokeninterceptor';
 import { fakeBackendProvider } from './mock/http.mock.interceptor';
-import { AppRouterGuard } from "./routerGuard.service";
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { AppRouterGuard } from "./auth/routerGuard.service";
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
