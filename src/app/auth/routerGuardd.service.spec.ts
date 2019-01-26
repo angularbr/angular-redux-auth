@@ -1,11 +1,10 @@
-
-import { AppRouterGuard } from './routerGuard.service';
-import { AppState } from '../reducers';
-import { State } from '../store/reducers/auth.reducer';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from 'src/testings/utils';
-import { RouterTestingModule } from '@angular/router/testing';
+import { AppRouterGuard } from './routerGuard.service';
+import { AppState } from '../reducers';
+import { State } from '../store/reducers/auth.reducer';
 import { isAuthentication } from '../store';
 
 describe('RouterGuardSevice', () => {

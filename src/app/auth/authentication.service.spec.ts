@@ -3,7 +3,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { AuthenticationService } from './authentication.service';
 import { fakeBackendProvider } from '../mock/http.mock.interceptor';
-import { Store } from '@ngrx/store';
 
 describe('AuthenticationService', () => {
   let injector: TestBed;

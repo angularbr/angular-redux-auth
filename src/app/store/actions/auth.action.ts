@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Authentication } from 'src/app/contracts/authenticate';
+import { Authentication } from '../../contracts/authenticate';
 
 export enum AuthActionsType {
     AUTH_LOAD = '[Authentication] Authentication load',

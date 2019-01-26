@@ -1,5 +1,5 @@
 import * as fromAction from '../actions/auth.action';
-import { Authentication } from 'src/app/contracts/authenticate';
+import { Authentication } from '../../contracts/authenticate';
 
 export interface State extends Authentication {
     token: string,
